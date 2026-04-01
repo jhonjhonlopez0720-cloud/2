@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Tulip Bouquet - Monthsary Gift</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0c0c1a 0%, #000000 100%);
+            color: #f5f5f5;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Subtle particles */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 20% 80%, rgba(255,77,109,0.05) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 20%, rgba(255,77,109,0.05) 0%, transparent 50%),
+                              radial-gradient(circle at 40% 40%, rgba(0,255,150,0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .bouquet {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            position: relative;
+            z-index: 10;
+            min-height: 400px;
+        }
+
+        .tulip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: bottom center;
+        }
+
+        .stem {
+            width: 4px;
+            height: 200px;
+            background: linear-gradient(to top, #2d5a2e, #4a7c4f);
+            border-radius: 2px 2px 0 0;
+            position: relative;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .stem::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 48%, rgba(255,255,255,0.1) 50%, transparent 52%);
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        .leaf {
+            position: absolute;
+            width: 30px;
+            height: 60px;
+            background: linear-gradient(to right, #3a6b3d, #5a8b5e);
+            border-radius: 50% 0 60% 0;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .leaf:nth-child(1) {
+            bottom: 100px;
+            left: -15px;
+            transform: rotate(-15deg);
+        }
+
+        .leaf:nth-child(2) {
+            bottom: 60px;
+            right: -15px;
+            transform: rotate(15deg);
+        }
+
+        .bud {
+            position: relative;
+            width: 40px;
+            height: 50px;
+            margin-top: -10px;
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .bloom .bud {
+            transform: scale(1.2) rotate(-2deg);
+        }
+
+        .petal {
+            position: absolute;
+            width: 28px;
+            height: 35px;
+            background: linear-gradient(135deg, #ff4d6d, #ff8a9a);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            filter: drop-shadow(0 4px 12px rgba(255,77,109,0.4));
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform-origin: bottom center;
+        }
+
+        .petal:nth-child(1) { transform: rotate(0deg) scaleY(0.3) translateY(20px); }
+        .petal:nth-child(2) { transform: rotate(120deg) scaleY(0.3) translateY(20px); }
+        .petal:nth-child(3) { transform: rotate(240deg) scaleY(0.3) translateY(20px); }
+
+        .bloom .petal:nth-child(1) { transform: rotate(0deg) scaleY(1); }
+        .bloom .petal:nth-child(2) { transform: rotate(120deg) scaleY(1); }
+        .bloom .petal:nth-child(3) { transform: rotate(240deg) scaleY(1); }
+
+        .bloom .petal {
+            filter: drop-shadow(0 0 20px rgba(255,77,109,0.6));
+            background: linear-gradient(135deg, #ff4d6d, #ffb3c6);
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        @keyframes bloom-glow {
+            0% { filter: drop-shadow(0 0 10px rgba(255,77,109,0.3)); }
+            100% { filter: drop-shadow(0 0 30px rgba(255,77,109,0.8)); }
+        }
+
+        .bloom .stem, .bloom .bud { animation: bloom-glow 1s ease-out forwards; }
+
+        .button {
+            background: rgba(255, 77, 109, 0.2);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 77, 109, 0.3);
+            color: #f5f5f5;
+            font-size: 18px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            z-index: 20;
+            font-weight: 500;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            margin-top: 40px;
+        }
+
+        .button:hover {
+            background: rgba(255, 77, 109, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(255,77,109,0.2);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+        .message {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-align: center;
+            max-width: 400px;
+            font-size: 20px;
+            line-height: 1.6;
+            padding: 40px;
+            position: relative;
+            z-index: 15;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-top: 40px;
+        }
+
+        .bloomed .message {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff4d6d;
+            animation: float 3s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .bouquet {
+                gap: 10px;
+                min-height: 300px;
+            }
+            .stem {
+                height: 150px;
+            }
+            .bud {
+                width: 32px;
+                height: 40px;
+            }
+            .petal {
+                width: 22px;
+                height: 28px;
+            }
+            .button {
+                font-size: 16px;
+                padding: 14px 28px;
+            }
+            .message {
+                font-size: 18px;
+                padding: 30px 20px;
+                margin-top: 20px;
+            }
+        }
+
+        /* Brighten background on bloom */
+        body.bloomed {
+            background: linear-gradient(135deg, #0c0c1a 0%, #1a0a1a 50%, #000000 100%);
+        }
+
+        body.bloomed::before {
+            opacity: 0.8;
+        }
+
+        /* Typing effect */
+        .typing {
+            border-right: 2px solid #ff4d6d;
+            overflow: hidden;
+        }
+
+        /* Hidden YouTube player */
+        #youtube-player {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            width: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    <div class="bouquet" id="bouquet">
+        <!-- 6 Tulips -->
+        <div class="tulip" style="animation-delay: 0s">
+            <div class="stem">
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+            </div>
+            <div class="bud">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+            </div>
+        </div>
+        <div class="tulip" style="animation-delay: 0.1s">
+            <div class="stem">
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+            </div>
+            <div class="bud">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+            </div>
+        </div>
+        <div class="tulip" style="animation-delay: 0.2s; transform: scale(0.9)">
+            <div class="stem">
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+            </div>
+            <div class="bud">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+            </div>
+        </div>
+        <div class="tulip" style="animation-delay: 0.3s; transform: scale(1.1)">
+            <div class="stem">
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+            </div>
+            <div class="bud">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+            </div>
+        </div>
+        <div class="tulip" style="animation-delay: 0.4s">
+            <div class="stem">
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+            </div>
+            <div class="bud">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+            </div>
+        </div>
+        <div class="tulip" style="animation-delay: 0.5s; transform: scale(0.95)">
+            <div class="stem">
+                <div class="leaf"></div>
+                <div class="leaf"></div>
+            </div>
+            <div class="bud">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+            </div>
+        </div>
+    </div>
+    <button class="button" id="bloomBtn">Tap mo 'to 💖</button>
+    <div class="message" id="message">
+        Hey love! Happy monthsary natin! 🌷 Parang tulips tayo ha, dahan-dahan nag-bloom pero sobrang ganda ng resulta. Medyo makulit ako minsan pero ikaw pa rin favorite ko forever. Salamat sa lahat, sobra kang blessing. I love you so much! 💕😘
+    </div>
+    <div id="youtube-player"></div>
+
+    <script>
+        // YouTube API setup for audio only [web:1][page:1]
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0',
+                width: '0',
+                videoId: '__8HhslsBEk',  // Ebeb by Flow G [web:1]
+                playerVars: {
+                    'playsinline': 1,
+                    'controls': 0,
+                    'modestbranding': 1,
+                    'rel': 0,
+                    'showinfo': 0,
+                    'fs': 0
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Player ready, don't autoplay
+        }
+
+        // Load YouTube API
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Bloom interaction
+        const btn = document.getElementById('bloomBtn');
+        const bouquet = document.getElementById('bouquet');
+        const body = document.body;
+        const message = document.getElementById('message');
+        const heartsContainer = document.getElementById('hearts');
+        let bloomed = false;
+
+        btn.addEventListener('click', () => {
+            if (bloomed) return;
+            bloomed = true;
+
+            // Bloom tulips staggered
+            const tulips = document.querySelectorAll('.tulip');
+            tulips.forEach((tulip, index) => {
+                setTimeout(() => {
+                    tulip.classList.add('bloom');
+                }, index * 200);
+            });
+
+            // Brighten background
+            body.classList.add('bloomed');
+
+            // Show message
+            setTimeout(() => {
+                body.classList.add('bloomed');
+                message.classList.add('bloomed');
+                typeWriter(message);
+            }, 1500);
+
+            // Start music after interaction [web:2][page:1]
+            if (player && player.playVideo) {
+                player.playVideo();
+            }
+
+            // Floating hearts
+            createHearts();
+        });
+
+        function createHearts() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '💖';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDelay = Math.random() * 0.5 + 's';
+                    heartsContainer.appendChild(heart);
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        function typeWriter(element) {
+            const text = element.textContent;
+            element.textContent = '';
+            element.classList.add('typing');
+            let i = 0;
+            const timer = setInterval(() => {
+                element.textContent += text.charAt(i);
+                i++;
+                if (i > text.length) {
+                    clearInterval(timer);
+                    element.classList.remove('typing');
+                }
+            }, 80);
+        }
+
+        // Entrance animation
+        window.addEventListener('load', () => {
+            bouquet.style.opacity = '0';
+            bouquet.style.transform = 'scale(0.8) translateY(20px)';
+            bouquet.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            setTimeout(() => {
+                bouquet.style.opacity = '1';
+                bouquet.style.transform = 'scale(1) translateY(0)';
+            }, 200);
+        });
+    </script>
+</body>
+</html>
